@@ -67,6 +67,7 @@ var cli="";
 function entrar(c){
 cli=c==1?"sasa":"kael";
 room=cli;
+apiSend("sistema","🔔 Cliente entrou na central");
 document.getElementById("portal").classList.add("hidden");
 document.getElementById("cht").classList.remove("hidden");
 document.getElementById("tit").textContent=cli;
