@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Ajuda Mini Mateuzinho</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="particles-bg" id="particlesBg"></div>
+<div class="portal-container" id="portalScreen">
+    <div class="portal-card">
+        <div class="portal-logo">🏢</div>
+        <h1 class="portal-title">Bem-vindo à Central de Ajuda</h1>
+        <h2 class="portal-brand">Mini Mateuzinho</h2>
+        <p class="portal-subtitle">Selecione seu perfil para atendimento personalizado:</p>
+        <div class="portal-buttons">
+            <button class="btn-client btn-sasa" onclick="enterChat('sasa')">
+                <span class="btn-icon">🌸</span>
+                <span class="btn-label">Você já é uma cliente <strong>sasa</strong>?</span>
+                <span class="btn-sub">Clique aqui</span>
+            </button>
+            <button class="btn-client btn-kael" onclick="enterChat('kael')">
+                <span class="btn-icon">✨</span>
+                <span class="btn-label">Se for uma cliente <strong>kael</strong></span>
+                <span class="btn-sub">Clique aqui</span>
+            </button>
+        </div>
+    </div>
+</div>
+<!-- CHAT FULLSCREEN -->
+<div class="chat-fullscreen hidden" id="chatScreen">
+<div class="chat-container">
+<div class="chat-sidebar" id="chatSidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">🤖</div>
+        <div class="sidebar-info"><h3>Empresas Super</h3><h4>Mini Mateuzinho</h4></div>
+    </div>
+    <div class="sidebar-colaborador"><span class="badge">Colaborador</span><strong>Mini Mateuzinho</strong></div>
+    <div class="sidebar-client" id="sidebarClient"><span class="badge">Cliente</span><strong id="clientName">---</strong></div>
+    <div class="sidebar-menu">
+        <button class="menu-item active" id="menuChat" onclick="showChatView()">💬 Chat</button>
+        <button class="menu-item" id="menuGames" onclick="showGamesView()">🎮 Joguinhos</button>
+        <button class="menu-item" id="menuExtras" onclick="showExtrasView()">🎁 Surpresas</button>
+    </div>
+    <button class="btn-humano" onclick="chamarHumano()">📞 Falar com Mini Mateuzinho (humano)</button>
+    <button class="btn-voltar" onclick="voltarPortal()">🚪 Sair</button>
+</div>
+<div class="chat-main" id="chatMainView">
+    <div class="chat-topbar"><span>💬 Atendimento em tempo real</span><span class="online-dot" id="onlineStatus">● Online agora</span></div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-typing hidden" id="typingIndicator">Mini Mateuzinho está digitando<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span></div>
+    <div class="quick-replies" id="quickReplies">
+        <button class="qr-btn" onclick="sendQuickReply('Oi, tudo bem?')">💬 Oi, tudo bem?</button>
+        <button class="qr-btn" onclick="sendQuickReply('Quero jogar! 🎮')">🎮 Quero jogar!</button>
+        <button class="qr-btn" onclick="sendQuickReply('Me mostra as surpresas 🎁')">🎁 Surpresas</button>
+        <button class="qr-btn" onclick="sendQuickReply('Preciso de ajuda 💜')">💜 Ajuda</button>
+    </div>
+    <div class="chat-input-area">
+        <button class="btn-emoji" onclick="sendQuickEmoji('❤️')">❤️</button>
+        <button class="btn-emoji" onclick="sendQuickEmoji('🌸')">🌸</button>
+        <button class="btn-emoji" onclick="sendQuickEmoji('😊')">😊</button>
+        <input type="text" id="chatInput" class="chat-input" placeholder="Digite sua mensagem..." onkeypress="handleChatEnter(event)">
+        <button class="chat-send" onclick="sendMessage()">➤</button>
+    </div>
+</div>
+<div class="chat-main hidden" id="gamesView">
+    <div class="chat-topbar"><span>🎮 Mini Joguinhos Colaborativos</span></div>
+    <div class="games-inline">
+        <div class="game-card-inline"><h3>🎯 Jogo da Velha</h3><p>❤️ vs 🌸</p><div class="board" id="board"><div class="cell" onclick="makeMove(0)"></div><div class="cell" onclick="makeMove(1)"></div><div class="cell" onclick="makeMove(2)"></div><div class="cell" onclick="makeMove(3)"></div><div class="cell" onclick="makeMove(4)"></div><div class="cell" onclick="makeMove(5)"></div><div class="cell" onclick="makeMove(6)"></div><div class="cell" onclick="makeMove(7)"></div><div class="cell" onclick="makeMove(8)"></div></div><p class="game-status" id="tttStatus">Vez do: ❤️</p><button class="btn-game-sm" onclick="resetTicTacToe()">🔄</button></div>
+        <div class="game-card-inline"><h3>💗 Clique Corações</h3><p>Em 15 segundos!</p><div class="heart-game-area" id="heartGameArea"><p class="game-status" id="heartScore">Corações: 0 | Tempo: 15s</p><button class="btn-game-sm" onclick="startHeartGame()">▶ Iniciar</button></div></div>
+        <div class="game-card-inline"><h3>🧠 Memória</h3><p>Encontre os pares</p><div class="memory-board" id="memoryBoard"></div><p class="game-status" id="memoryStatus">Pares: 0 / 6</p><button class="btn-game-sm" onclick="resetMemory()">🔄</button></div>
+        <div class="game-card-inline"><h3>💭 Quiz do Casal</h3><p>Quanto se conhecem?</p><p class="question-text" id="questionText">Clique para começar!</p><div class="question-options" id="questionOptions"></div><p class="game-status" id="quizScore">Pontuação: 0</p><button class="btn-game-sm" onclick="newQuestion()">▶ Nova</button></div>
+    </div>
+</div>
+<div class="chat-main hidden" id="extrasView">
+    <div class="chat-topbar"><span>🎁 Surpresas para Você</span></div>
+    <div class="extras-inline">
+        <div class="extra-card" onclick="showSurprise('poema')"><span class="extra-icon">📝</span><h3>Poema Exclusivo</h3><p>Um poema escrito só pra você</p></div>
+        <div class="extra-card" onclick="showSurprise('playlist')"><span class="extra-icon">🎵</span><h3>Nossa Playlist</h3><p>Músicas que lembram você</p></div>
+        <div class="extra-card" onclick="showSurprise('carta')"><span class="extra-icon">💌</span><h3>Carta Aberta</h3><p>Palavras do coração</p></div>
+        <div class="extra-card" onclick="showSurprise('galeria')"><span class="extra-icon">🖼️</span><h3>Galeria do Amor</h3><p>Nossos momentos especiais</p></div>
+        <div class="extra-card" onclick="showSurprise('promessas')"><span class="extra-icon">🤞</span><h3>Promessas</h3><p>O que eu prometo pra nós</p></div>
+        <div class="extra-card" onclick="showSurprise('futuro')"><span class="extra-icon">🌟</span><h3>Nosso Futuro</h3><p>Sonhos que quero realizar</p></div>
+    </div>
+    <div class="surprise-popup hidden" id="surprisePopup"><div class="surprise-content" id="surpriseContent"></div><button class="btn-fechar-surpresa" onclick="closeSurprise()">Fechar ✕</button></div>
+</div>
+</div>
+</div>
+<!-- Modal WhatsApp -->
+<div class="whatsapp-modal hidden" id="whatsappModal">
+    <div class="whatsapp-card">
+        <div class="whatsapp-anim">📞</div>
+        <h2>Conectando ao Mini Mateuzinho...</h2>
+        <p>Você será redirecionada para falar diretamente comigo! 💜</p>
+        <div class="whatsapp-loading"><span></span><span></span><span></span></div>
+        <button class="btn-whatsapp" id="btnWhatsApp" onclick="abrirWhatsApp()">
+            💬 Falar pelo WhatsApp
+        </button>
+        <button class="btn-cancelar" onclick="fecharWhatsAppModal()">
+            Cancelar
+        </button>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

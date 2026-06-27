@@ -1,0 +1,46 @@
+<!DOCTYPE html><html><head><meta charset=UTF-8><meta name=viewport content=width=device-width,initial-scale=1.0><title>Mini</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0a0a1a;color:#fff;font-family:sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh}.hidden{display:none!important}.card{background:#1a1a3e;border-radius:20px;padding:30px;text-align:center;max-width:400px;border:1px solid rgba(255,107,157,.3)}h1{font-size:1.8em;background:linear-gradient(45deg,#ff6b9d,#c44dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.btn{display:block;width:100%;padding:14px;margin:8px 0;border-radius:15px;border:none;cursor:pointer;font-size:1em;color:#fff}.pink{background:rgba(255,107,157,.2);border:2px solid #ff6b9d}.purple{background:rgba(196,77,255,.2);border:2px solid #c44dff}.green{background:#25d366;font-weight:bold;animation:glow 2s infinite}@keyframes glow{0%,100%{box-shadow:0 0 10px rgba(37,211,102,.3)}50%{box-shadow:0 0 25px rgba(37,211,102,.6)}}.chat{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a1a;display:flex;flex-direction:column}.msgs{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:8px}.msg{max-width:80%;padding:10px 14px;border-radius:16px;font-size:.85em}.bot{background:#1a1a3e;align-self:flex-start;border-left:3px solid #c44dff}.user{background:linear-gradient(135deg,#ff6b9d,#c44dff);align-self:flex-end}.row{display:flex;gap:8px;padding:10px;background:#111133}.row input{flex:1;padding:10px;border-radius:20px;border:1px solid rgba(196,77,255,.3);background:#0d0d25;color:#fff;outline:none}.row button{background:linear-gradient(45deg,#ff6b9d,#c44dff);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer}.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}.mcard{background:#111133;border-radius:20px;padding:25px;text-align:center;max-width:400px;width:100%;border:2px solid #25d366;max-height:90vh;overflow-y:auto}.svc{display:block;width:100%;background:#25d366;color:#fff;border:none;padding:10px;border-radius:12px;cursor:pointer;margin:4px 0;font-size:.9em}.svc:hover{background:#128c7e}</style></head><body>
+<div class="chat hidden" id="chat">
+<div style="padding:10px 15px;background:#111133;display:flex;justify-content:space-between;font-size:.85em"><span id="tit">💬 Central</span><span style="color:#2ecc71">● Online</span></div>
+<script>
+let cli="",ch=[];
+function entrar(c){cli=c==1?"sasa":"kael";document.getElementById("portal").classList.add("hidden");document.getElementById("chat").classList.remove("hidden");document.getElementById("tit").textContent="💬 Central - "+cli;document.getElementById("msgs").innerHTML="";dg(1);setTimeout(()=>{dg(0);if(c==1){addB("Oii mei mei! 💖 Bem-vinda a Central Mini Mateuzinho!");setTimeout(()=>addB("Sou o Mini Mateuzinho! Pode falar comigo ou clicar no botao verde!"),600)}else{addB("Oii kael! ✨ Sou o <b>robo</b> do Mini Mateuzinho");setTimeout(()=>addB("💡 Quer falar com o Mini de verdade? Clica no botao verde 📞!"),800)}},1000)}
+function voltar(){document.getElementById("chat").classList.add("hidden");document.getElementById("portal").classList.remove("hidden");document.getElementById("msgs").innerHTML=""}
+function addB(m){const d=document.createElement("div");d.className="msg bot";d.innerHTML=m;document.getElementById("msgs").appendChild(d);document.getElementById("msgs").scrollTop=document.getElementById("msgs").scrollHeight}
+function addU(m){const d=document.createElement("div");d.className="msg user";d.textContent=m;document.getElementById("msgs").appendChild(d);document.getElementById("msgs").scrollTop=document.getElementById("msgs").scrollHeight}
+function dg(s){document.getElementById("dig").classList.toggle("hidden",!s)}
+function env(){const i=document.getElementById("inp");const m=i.value.trim();if(!m)return;addU(m);i.value="";dg(1);setTimeout(()=>{dg(0);addB(responder(m))},800+Math.random()*1000)}
+function responder(m){const t=m.toLowerCase();const ik=cli==="kael";if(t.includes("oi"))return ik?"Oii! Sou robo 🤖 Quer o Mini real? 📞":"Oii mei mei! 💖";if(t.includes("amor"))return ik?"O Mini real vai amar! Fala com ele 📞":"Te amo demais! 💖";return ik?"Sou robo! Chama o Mini real no botao verde 📞":"Pode falar! 💜"}
+function salvar(){localStorage.setItem("ch_"+cli,JSON.stringify(ch))}
+function carregar(){const d=localStorage.getItem("ch_"+cli);if(d)ch=JSON.parse(d);else ch=[]}
+function addMH(de,msg){ch.push({de,msg,h:new Date().toLocaleTimeString()});salvar();rH();rA()}
+function rH(){const e=document.getElementById("msgsH");if(!e)return;e.innerHTML=ch.map(m=>"<div class=msg "+(m.de==="cliente"?"user":"bot")+" style=font-size:.72em><b>"+(m.de==="cliente"?"Voce":"Mateuzinho")+":</b> "+m.msg+"</div>").join("");e.scrollTop=e.scrollHeight}
+function rA(){const e=document.getElementById("msgsA");if(!e)return;e.innerHTML=ch.map(m=>"<div class=msg "+(m.de==="cliente"?"user":"bot")+" style=font-size:.72em><b>"+(m.de==="cliente"?"Cliente":"Voce")+":</b> "+m.msg+"</div>").join("");e.scrollTop=e.scrollHeight}
+function humano(){document.getElementById("modH").classList.remove("hidden");document.getElementById("msgH").innerHTML="<b>Boa tarde! Me chamo Mini Mateuzinho das empresas Mini Mateuzinho, tuturututu! 🎵</b><br>Como podemos ajudar?";document.getElementById("svcArea").innerHTML="<button class=svc onclick=pedir('Tiracao de caucinha')>🩰 Tiracao de caucinha</button><button class=svc onclick=pedir('Beijinho na boca')>💋 Beijinho na boca</button><button class=svc onclick=pedir('Fuki fuki')>🌬️ Fuki fuki</button><button class=svc onclick=pedir('Copo de agua')>💧 Copo de agua</button>";carregar();rH();document.getElementById("inpH").value=""}
+function pedir(s){document.getElementById("inpH").value=s;envH()}
+function envH(){const i=document.getElementById("inpH");const m=i.value.trim();if(!m)return;addMH("cliente",m);i.value=""}
+function admin(){document.getElementById("modA").classList.remove("hidden");document.getElementById("cliA").textContent=cli||"---";carregar();rA();setInterval(()=>{carregar();rA()},2000)}
+function envA(){const i=document.getElementById("inpA");const m=i.value.trim();if(!m)return;addMH("mateuzinho",m);i.value=""}
+function limpar(){ch=[];salvar();rH();rA()}
+</script></body></html>
+<div class="msgs" id="msgs"></div>
+<div style="padding:5px 15px;color:#888;font-size:.75em" class="hidden" id="dig">Digitando...</div>
+<div class="row"><input id="inp" placeholder="Digite..." onkeypress="if(event.key==='Enter')env()"><button onclick="env()">➤</button></div>
+<button class="btn green" onclick="humano()">📞 Falar com Mini Mateuzinho humano</button>
+<button class="btn" style="background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.3);color:#f66;margin-top:4px" onclick="voltar()">🚪 Sair</button>
+</div>
+<div class="modal hidden" id="modH"><div class="mcard">
+<div style="font-size:40px">🤖➡️💜</div><h2 style="color:#25d366;margin:8px 0">Conectando...</h2>
+<p id="msgH" style="color:#aaa;font-size:.85em;margin:8px 0"></p>
+<div id="svcArea" style="margin:8px 0"></div>
+<div class="msgs" id="msgsH" style="max-height:150px;overflow-y:auto;margin:8px 0;text-align:left"></div>
+<div class="row"><input id="inpH" placeholder="Digite..." onkeypress="if(event.key==='Enter')envH()"><button onclick="envH()">➤</button></div>
+<button class="btn" style="background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.4);color:#f66;margin-top:8px" onclick="document.getElementById('modH').classList.add('hidden')">Voltar</button>
+</div></div>
+<div class="modal hidden" id="modA"><div class="mcard" style="border-color:#ff6b9d">
+<div style="font-size:35px">💜</div><h2 style="color:#ff6b9d;margin:8px 0">Painel do Mateuzinho</h2>
+<p style="color:#aaa;font-size:.75em">Cliente: <b id="cliA">---</b></p>
+<div class="msgs" id="msgsA" style="max-height:200px;overflow-y:auto;margin:8px 0;text-align:left;background:#0d0d25;border-radius:10px;padding:10px"></div>
+<div class="row"><input id="inpA" placeholder="Responder..." onkeypress="if(event.key==='Enter')envA()"><button onclick="envA()">➤</button></div>
+<button class="btn" style="background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.4);color:#f66;margin-top:8px" onclick="document.getElementById('modA').classList.add('hidden')">Fechar</button>
+<button class="btn" style="background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.4);color:#f66;margin-top:4px" onclick="limpar()">🗑️ Limpar</button>
+</div></div>
