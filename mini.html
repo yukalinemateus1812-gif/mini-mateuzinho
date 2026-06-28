@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mini Mateuzinho • Central de Relacionamento</title>
+<title>Super Mini Mateuzinho • Central de Relacionamento</title>
 <style>
 :root{--bg:#0a0a1a;--bg2:#111133;--bg3:#0d0d25;--pink:#ff6b9d;--purple:#c44dff;--green:#25d366;--text:#e0e0e0;--text2:#888}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -57,7 +57,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 <div class="logo">🏢💜</div>
 <h1>Super Mini Mateuzinho</h1>
 <p class="sub" style="color:var(--pink);font-weight:600;font-size:.85em">Empresas Super Mini Mateuzinho</p>
-<p class="sub">Central de Relacionamento com o Cliente<br>Atendimento 24 horas • 7 dias por semana</p>
+<p class="sub">Central de Relacionamento com o Cliente<br>Atendimento 24h 💜</p>
 <button class="btn btn-sasa" onclick="entrar(1)">🌸 Entrar como <b>Mei Mei Sasa</b></button>
 <button class="btn btn-kael" onclick="entrar(2)">✨ Entrar como <b>Kael</b></button>
 <p style="color:var(--text2);font-size:.65em;margin-top:25px">Mini Mateuzinho © 2026 • Todos os direitos reservados<br><span style="font-size:.85em">Atendimento com amor 24h 💜</span></p>
@@ -70,7 +70,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 <div class="status" id="st">● Online</div>
 <div class="actions">
 <button onclick="humano()" id="btnHuman" style="background:var(--green);color:#fff;border:none;padding:10px 18px;border-radius:20px;cursor:pointer;font-weight:700;font-size:.82em;animation:glowBtn 2s infinite">📞 Solicitar Atendimento</button>
-<button onclick="voltar()" style="background:rgba(255,0,0,.1);color:#f66;border:1px solid rgba(255,0,0,.3);padding:10px 16px;border-radius:20px;cursor:pointer;font-size:.78em">🚪 Sair</button>
+<button onclick="voltar()" style="background:rgba(255,0,0,.1);color:#f66;border:1px solid rgba(255,0,0,.3);padding:10px 16px;border-radius:20px;cursor:pointer;font-size:.8em;font-weight:600">🚪 Sair</button>
 </div>
 </div>
 <div class="games-bar">
@@ -99,9 +99,8 @@ function entrar(c){
 cli=c==1?"sasa":"kael";room=cli;
 document.getElementById("login").classList.add("hidden");
 document.getElementById("chat").classList.remove("hidden");
-document.getElementById("tit").innerHTML="Super Mini Mateuzinho<br><span style='font-size:.6em;color:var(--text2)'>Central de Relacionamento</span>";
-document.getElementById("st").innerHTML="● Online • "+(c==1?"🌸 Mei Mei":"✨ Kael");
-document.getElementById("btnHuman").innerHTML="📞 Solicitar Atendimento";
+document.getElementById("tit").textContent=c==1?"🌸 Mei Mei Sasa":"✨ Kael";
+document.getElementById("btnHuman").textContent="📞 Solicitar atendimento humanizado";
 apiSend("sistema","🔔 "+cli+" entrou na central");
 if(c==1){
 addB("Oii meimei sasa! ❤️❤️❤️ Seja bem-vinda a Central Mini Mateuzinho!","🤖");
@@ -182,8 +181,8 @@ var respostasServico={
 
 function humano(){
 modo="humano";
-document.getElementById("btnHuman").innerHTML="📋 Menu de Serviços";
-addB("<b>Boa tarde! Seja bem-vindo(a) à Central de Relacionamento das Empresas Super Mini Mateuzinho!</b><br>Eu sou o atendente virtual. Em que posso ajudar?","💚");
+document.getElementById("btnHuman").textContent="📋 Menu de Servicos";
+addB("<b>Boa tarde! Me chamo Mini Mateuzinho das empresas Mini Mateuzinho, tuturututu!</b><br>Como podemos ajudar?","💚");
 setTimeout(function(){
 addB("<b>📋 MENU DE SERVICOS:</b><br>"+
 '<button class="svc-btn" onclick="pedir(\'Tiracao de caucinha\')">🩰 Tiracao de caucinha</button>'+
@@ -221,7 +220,7 @@ apiSend("servico",resp);
 function voltar(){
 if(pollHumano){clearInterval(pollHumano);pollHumano=null;}
 modo="bot";
-document.getElementById("btnHuman").innerHTML="📞 Solicitar Atendimento";
+document.getElementById("btnHuman").textContent="📞 Solicitar atendimento humanizado";
 document.getElementById("chat").classList.add("hidden");
 document.getElementById("login").classList.remove("hidden");
 document.getElementById("msgs").innerHTML="";
