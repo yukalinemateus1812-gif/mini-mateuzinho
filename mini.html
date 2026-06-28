@@ -77,6 +77,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 <button onclick="jogo(2)">💗 Corações</button>
 <button onclick="jogo(3)">🧠 Memória</button>
 <button onclick="jogo(4)">💭 Quiz</button>
+<button onclick="jogo(5)">📝 Forca</button>
+<button onclick="jogo(6)">🎲 Verdade</button>
 </div>
 <div class="msgs" id="msgs"></div>
 <div class="input-area">
@@ -227,6 +229,7 @@ function jogo(t){
 var c=document.getElementById("gameCard");
 document.getElementById("gamePanel").classList.remove("hidden");
 if(t==1)jv2(c);if(t==2)jc2(c);if(t==3)jm2(c);if(t==4)jq2(c);
+if(t==5)jf2(c);if(t==6)jvd2(c);
 }
 function fecharJogo(){document.getElementById("gamePanel").classList.add("hidden")}
 
@@ -263,6 +266,27 @@ c.innerHTML='<h3>💭 Quiz do Amor</h3><p id="qq2" style="color:#ddd;font-size:.
 qs2=0;jq3();
 }
 function jq3(){var q=qq2[Math.floor(Math.random()*3)];document.getElementById("qq2").textContent=q.q;var o=document.getElementById("qo2");o.innerHTML="";q.o.forEach(function(opt,i){var b=document.createElement("button");b.className="quiz-opt";b.textContent=opt;b.onclick=function(){var all=o.children;for(var x=0;x<all.length;x++)all[x].style.pointerEvents="none";if(i==q.a){b.classList.add("correct");qs2++;document.getElementById("qp2").textContent="Pontos: "+qs2}else{b.classList.add("wrong");all[q.a].classList.add("correct")}setTimeout(jq3,1500)};o.appendChild(b)})}
+// FORCA DO AMOR
+var fp,fw,fe,ft;
+function jf2(c){
+fw=["AMOR","SASA","MEIMEI","BEIJO","CARINHO","TUTURUTUTU","CAFUNE","ABRACO","CORACAO","FELICIDADE","BORBOLETA","PULGUINHA"];
+fp=fw[Math.floor(Math.random()*fw.length)];fe=[];ft=6;
+c.innerHTML='<h3>📝 Forca do Amor</h3><p class="game-info">Descubra a palavra! ❤️ Tentativas: <b id="jft">'+ft+'</b></p><div style="font-size:2em;letter-spacing:8px;margin:15px 0;color:var(--pink)" id="jfw"></div><p id="jfm" style="color:var(--text2);font-size:.75em;margin:8px 0"></p><div id="jfk"></div><p id="jfr" style="margin-top:10px"></p><button class="game-btn" onclick="jf2(document.getElementById(\'gameCard\'));">Nova</button> <button class="game-btn close" onclick="fecharJogo()">Fechar</button>';
+jfr();
+}
+function jfr(){
+var w=document.getElementById("jfw");w.textContent="";
+for(var i=0;i<fp.length;i++){w.textContent+=(fe.indexOf(fp[i])>=0?fp[i]:"_")+" "}
+if(w.textContent.indexOf("_")==-1){document.getElementById("jfr").innerHTML='<span style="color:var(--green);font-size:1.1em">🎉 Voce acertou! A palavra e: <b>'+fp+'</b> 💜</span>';return}
+if(ft<=0){document.getElementById("jfr").innerHTML='<span style="color:#e74c3c">😢 Fim de jogo! A palavra era: <b>'+fp+'</b></span>';return}
+var kb=document.getElementById("jfk");kb.innerHTML="";for(var i=65;i<=90;i++){var l=String.fromCharCode(i);var b=document.createElement("button");b.textContent=l;b.style.cssText="width:32px;height:32px;margin:2px;border-radius:6px;border:1px solid rgba(196,77,255,.2);background:rgba(196,77,255,.05);color:var(--text);cursor:pointer;font-size:.7em";if(fe.indexOf(l)>=0){b.style.opacity=".3";b.disabled=true}b.onclick=function(){var lt=this.textContent;fe.push(lt);this.style.opacity=".3";this.disabled=true;if(fp.indexOf(lt)==-1){ft--;document.getElementById("jft").textContent=ft;document.getElementById("jfm").textContent="❌ Letra "+lt+" nao existe!"}else{document.getElementById("jfm").textContent="✅ Letra "+lt+" encontrada!"}jfr()};kb.appendChild(b)}
+}
+// VERDADE OU DESAFIO
+var vd=[{v:"Qual foi o momento mais romantico que voce ja viveu?",d:"Mande um audio cantando uma musica romantica!"},{v:"Se o Mini estivesse aqui agora, o que voce faria?",d:"Faca uma dancinha de amor agora mesmo!"},{v:"Qual a coisa mais fofa que alguem ja fez por voce?",d:"Desenhe um coracao no ar com as maos!"},{v:"Qual seu apelido favorito que o Mini te da?",d:"Fale 'tuturututu' em voz alta 3 vezes!"},{v:"O que voce mais gosta no Mini Mateuzinho?",d:"Mande um emoji de coracao pra alguem agora!"},{v:"Se voce pudesse dar um presente pro Mini, qual seria?",d:"Faca um cafune no seu proprio cabelo!"},{v:"Qual foi o melhor beijo da sua vida?",d:"Mande um beijo estalado!"},{v:"O que te faz sentir mais amada(o)?",d:"De um abraco em voce mesmo(a) bem gostoso!"}];
+function jvd2(c){
+var q=vd[Math.floor(Math.random()*vd.length)];
+c.innerHTML='<h3>🎲 Verdade ou Desafio</h3><p style="color:var(--text);font-size:.9em;margin:15px 0;line-height:1.6"><b style="color:var(--pink)">💬 Verdade:</b> '+q.v+'</p><p style="color:var(--text);font-size:.9em;margin:15px 0;line-height:1.6"><b style="color:var(--purple)">🎯 Desafio:</b> '+q.d+'</p><button class="game-btn" onclick="jvd2(document.getElementById(\'gameCard\'));">Nova Pergunta</button> <button class="game-btn close" onclick="fecharJogo()">Fechar</button>';
+}
 </script>
 </body>
 </html>
