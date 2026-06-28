@@ -76,6 +76,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 </div>
 </div>
 <div class="msgs" id="msgs"><div class="empty-state"><div class="icon">💬</div><h3>Nenhuma conversa selecionada</h3><p>Selecione um cliente na barra lateral para ver as mensagens</p></div></div>
+<div style="padding:6px 28px;display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid rgba(255,107,157,.08)" id="quickBtns" class="hidden">
+<button onclick="quickSend('Oii meimei! 💜 Sou eu, o Mini Mateuzinho! To aqui pra voce, viu? Tuturututu! 🎵')" style="background:rgba(255,107,157,.1);color:var(--pink);border:1px solid rgba(255,107,157,.2);padding:5px 10px;border-radius:12px;cursor:pointer;font-size:.65em">💜 Oi meimei!</button>
+<button onclick="quickSend('Voce e a pessoa mais sasa do mundo! 🌟 O Mini te ama demais!')" style="background:rgba(255,107,157,.1);color:var(--pink);border:1px solid rgba(255,107,157,.2);padding:5px 10px;border-radius:12px;cursor:pointer;font-size:.65em">🌟 Mais sasa!</button>
+<button onclick="quickSend('Nhenhenhe! Meimei tem pulgas? 🐾 Cuidado que eu vou contar pro Mini!')" style="background:rgba(196,77,255,.1);color:var(--purple);border:1px solid rgba(196,77,255,.2);padding:5px 10px;border-radius:12px;cursor:pointer;font-size:.65em">🐾 Pulgas?</button>
+<button onclick="quickSend('TUTURUTUTU! 🎵🎵🎵 Quem manda aqui sou eu, o robo mais fofo do Mini!')" style="background:rgba(196,77,255,.1);color:var(--purple);border:1px solid rgba(196,77,255,.2);padding:5px 10px;border-radius:12px;cursor:pointer;font-size:.65em">🎵 Tuturututu</button>
+<button onclick="quickSend('🤗 Vem ca me dar um abraco bem gostoso! O Mini mandou!')" style="background:rgba(37,211,102,.1);color:var(--green);border:1px solid rgba(37,211,102,.2);padding:5px 10px;border-radius:12px;cursor:pointer;font-size:.65em">🤗 Abraço</button>
+<button onclick="quickSend('🩰 Deixa eu tirar sua caucinha... devagarinho... e ainda dou um beijinho no pezinho! 👣💋')" style="background:rgba(37,211,102,.1);color:var(--green);border:1px solid rgba(37,211,102,.2);padding:5px 10px;border-radius:12px;cursor:pointer;font-size:.65em">🩰 Caucinha</button>
+</div>
 <div class="input-area">
 <input id="inp" placeholder="Digite sua resposta como Mini Mateuzinho...">
 <button id="btnSend">➤</button>
@@ -93,6 +101,7 @@ document.getElementById("headerTitle").innerHTML="💬 <span>Atendendo: "+r+"</s
 document.getElementById("headerStatus").style.display="inline";
 document.querySelectorAll(".room-btn").forEach(function(b){b.classList.toggle("active",b.dataset.room==r)});
 carregarMsgs();
+document.getElementById("quickBtns").classList.remove("hidden");
 if(pt)clearInterval(pt);
 pt=setInterval(pollMsgs,1500);
 }
@@ -180,6 +189,10 @@ atualizarSalas();
 
 document.getElementById("btnSend").addEventListener("click",enviar);
 document.getElementById("inp").addEventListener("keypress",function(e){if(e.key=="Enter")enviar()});
+
+function quickSend(msg){
+document.getElementById("inp").value=msg;enviar();
+}
 
 log("Admin v4 iniciado");
 atualizarSalas();
