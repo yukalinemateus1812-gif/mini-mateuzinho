@@ -1,244 +1,268 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Mini Mateuzinho</title><style>
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mini Mateuzinho • Central de Relacionamento</title>
+<style>
+:root{--bg:#0a0a1a;--bg2:#111133;--bg3:#0d0d25;--pink:#ff6b9d;--purple:#c44dff;--green:#25d366;--text:#e0e0e0;--text2:#888}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:linear-gradient(180deg,#0a0a1a,#1a0a2e);color:#fff;font-family:Segoe UI,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;overflow-x:hidden}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow:hidden}
 .hidden{display:none!important}
-.card{background:linear-gradient(145deg,#1a1a3e,#0d0d2b);border-radius:25px;padding:30px 25px;text-align:center;max-width:400px;width:90%;border:1px solid rgba(255,107,157,.2);box-shadow:0 0 60px rgba(138,43,226,.15)}
-h1{font-size:1.7em;background:linear-gradient(45deg,#ff6b9d,#c44dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:10px 0}
-.btn{display:block;width:100%;padding:14px;margin:8px 0;border-radius:15px;border:none;cursor:pointer;font-size:1em;color:#fff;text-align:left;transition:all .2s}
-.pink{background:rgba(255,107,157,.15);border:2px solid #ff6b9d}.pink:hover{background:rgba(255,107,157,.3);transform:translateY(-2px)}
-.purple{background:rgba(196,77,255,.15);border:2px solid #c44dff}.purple:hover{background:rgba(196,77,255,.3);transform:translateY(-2px)}
-.green{background:linear-gradient(135deg,#25d366,#128c7e);text-align:center;font-weight:bold;animation:glow 2s infinite}
-@keyframes glow{0%,100%{box-shadow:0 0 8px rgba(37,211,102,.3)}50%{box-shadow:0 0 20px rgba(37,211,102,.6)}}
-.chat{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a1a;display:flex;flex-direction:column;z-index:10}
-.topbar{display:flex;justify-content:space-between;padding:10px 15px;background:#111133;font-size:.85em;border-bottom:1px solid rgba(255,107,157,.15)}
-.online{color:#2ecc71}.msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:6px}
-.msg{max-width:85%;padding:10px 14px;border-radius:16px;font-size:.85em;line-height:1.4;animation:slideIn .3s ease}
-@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.bot{background:#1a1a3e;align-self:flex-start;border-bottom-left-radius:4px;border-left:3px solid #c44dff}
-.user{background:linear-gradient(135deg,#ff6b9d,#c44dff);align-self:flex-end;border-bottom-right-radius:4px}
-.input-area{display:flex;gap:6px;padding:10px;background:#111133}
-.input-area input{flex:1;padding:10px 14px;border-radius:20px;border:1px solid rgba(196,77,255,.3);background:#0d0d25;color:#fff;outline:none;font-size:.9em}
-.input-area button{background:linear-gradient(45deg,#ff6b9d,#c44dff);border:none;color:#fff;min-width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1em}
-.svc-btn{display:inline-block;background:#25d366;color:#fff;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;margin:3px;font-size:.8em;transition:all .2s}
-.svc-btn:hover{background:#128c7e;transform:scale(1.05)}
-.admin-btn{background:transparent;border:none;color:#333;font-size:11px;margin-top:12px;cursor:pointer}
-.panel{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:200;display:flex;align-items:center;justify-content:center;padding:15px}
-.pcard{background:#111133;border-radius:20px;padding:20px;max-width:400px;width:95%;border:2px solid #ff6b9d;max-height:90vh;overflow-y:auto;text-align:center}
-.pcard h3{color:#ff6b9d;margin:5px 0}
-.pmsgs{max-height:200px;overflow-y:auto;margin:8px 0;text-align:left;background:#0d0d25;border-radius:10px;padding:10px}
-</style></head><body>
-<div id="portal" class="card">
-<div style="font-size:45px;margin-bottom:5px">🏢</div>
-<p style="color:#c44dff;font-size:.7em;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px">Empresas Super</p>
-<h1 style="font-size:2em;margin:5px 0">Mini Mateuzinho</h1>
-<p style="color:#ff6b9d;font-size:.75em;margin:5px 0;letter-spacing:1px">CENTRAL DE ATENDIMENTO</p>
-<div style="width:50px;height:2px;background:linear-gradient(90deg,#ff6b9d,#c44dff);margin:15px auto"></div>
-<p style="color:#aaa;margin:15px 0;font-size:.85em">Bem-vindo(a)! Selecione seu perfil para continuar:</p>
-<button class="btn pink" onclick="entrar(1)"><span style="font-size:1.5em">🌸</span> <b>Mei Mei</b><br><small style="color:#ff6b9d">Cliente SASA</small></button>
-<button class="btn purple" onclick="entrar(2)"><span style="font-size:1.5em">✨</span> <b>Kael</b><br><small style="color:#c44dff">Cliente KAEL</small></button>
-<div style="width:50px;height:1px;background:rgba(255,255,255,.1);margin:15px auto"></div>
-<p style="color:#555;font-size:.65em">Atendimento 24h • Mini Mateuzinho © 2026</p>
-<a href="admin.html" style="display:block;width:100%;padding:8px;margin-top:10px;background:rgba(255,107,157,.1);border:1px dashed rgba(255,107,157,.4);color:#ff6b9d;border-radius:10px;cursor:pointer;font-size:.7em;text-decoration:none">💜 Painel do Mateuzinho (Admin)</a>
+.login{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-card{background:linear-gradient(145deg,#1a1a3e,#0d0d2b);border-radius:28px;padding:45px 35px;text-align:center;max-width:440px;width:100%;border:1px solid rgba(255,107,157,.2);box-shadow:0 0 80px rgba(138,43,226,.15),0 20px 60px rgba(0,0,0,.3);backdrop-filter:blur(10px)}
+.login-card .logo{font-size:50px;margin-bottom:10px}
+.login-card h1{font-size:1.6em;background:linear-gradient(45deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:5px 0}
+.login-card .sub{color:var(--text2);font-size:.8em;margin-bottom:20px}
+.btn{display:block;width:100%;padding:16px;margin:10px 0;border-radius:14px;cursor:pointer;font-size:1em;color:#fff;transition:all .3s;font-weight:600;text-align:left}
+.btn-sasa{background:linear-gradient(135deg,rgba(255,107,157,.2),rgba(255,107,157,.05));border:2px solid var(--pink)}
+.btn-sasa:hover{background:linear-gradient(135deg,rgba(255,107,157,.4),rgba(255,107,157,.15));transform:translateY(-2px)}
+.btn-kael{background:linear-gradient(135deg,rgba(196,77,255,.2),rgba(196,77,255,.05));border:2px solid var(--purple)}
+.btn-kael:hover{background:linear-gradient(135deg,rgba(196,77,255,.4),rgba(196,77,255,.15));transform:translateY(-2px)}
+.btn-admin{background:transparent;border:1px dashed rgba(255,255,255,.15);color:var(--text2);font-size:.75em;margin-top:15px;text-align:center}
+.btn-admin:hover{background:rgba(255,255,255,.03);color:var(--pink)}
+.chat{display:flex;flex-direction:column;height:100vh}
+.chat-header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:linear-gradient(180deg,var(--bg2),rgba(17,17,51,.8));border-bottom:1px solid rgba(255,107,157,.15);min-height:64px;backdrop-filter:blur(8px)}
+.chat-header .title{font-weight:700;font-size:1em;background:linear-gradient(45deg,var(--pink),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.chat-header .status{font-size:.7em;color:var(--green);display:flex;align-items:center;gap:4px}
+.chat-header .status::before{content:'';width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.games-bar{display:flex;gap:6px;padding:8px 20px;background:rgba(0,0,0,.3);overflow-x:auto;border-bottom:1px solid rgba(255,255,255,.03)}
+.games-bar button{background:linear-gradient(135deg,rgba(196,77,255,.1),rgba(255,107,157,.05));border:1px solid rgba(255,107,157,.15);color:var(--text);padding:6px 14px;border-radius:20px;cursor:pointer;font-size:.7em;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.games-bar button:hover{background:linear-gradient(135deg,rgba(196,77,255,.2),rgba(255,107,157,.1));border-color:var(--purple)}
+.msgs{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:6px}
+.msgs::-webkit-scrollbar{width:4px}
+.msgs::-webkit-scrollbar-thumb{background:rgba(255,107,157,.2);border-radius:2px}
+.msg-row{display:flex;gap:8px;max-width:82%;animation:msgIn .3s ease}
+.msg-row.bot{align-self:flex-start}
+.msg-row.user{align-self:flex-end;flex-direction:row-reverse}
+.msg-row.system{align-self:center;max-width:92%}
+@keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.msg-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;font-weight:700}
+.msg-row.bot .msg-avatar{background:rgba(255,107,157,.15)}
+.msg-row.user .msg-avatar{background:rgba(196,77,255,.15)}
+.msg-bubble{background:var(--bg2);padding:10px 14px;border-radius:16px;font-size:.82em;line-height:1.5}
+.msg-row.bot .msg-bubble{border-bottom-left-radius:4px;border-left:2px solid var(--pink)}
+.msg-row.user .msg-bubble{background:linear-gradient(135deg,rgba(255,107,157,.25),rgba(196,77,255,.2));border-bottom-right-radius:4px}
+.msg-row.system .msg-bubble{background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.15);font-size:.75em;color:#a0e0b0;text-align:center}
+.msg-bubble .sender{font-size:.6em;color:var(--pink);font-weight:700}
+.msg-bubble .time{font-size:.6em;color:var(--text2);margin-top:3px;text-align:right}
+.input-area{display:flex;gap:10px;padding:14px 24px;background:linear-gradient(0deg,var(--bg2),rgba(17,17,51,.8));border-top:1px solid rgba(255,107,157,.15);backdrop-filter:blur(8px)}
+.input-area input{flex:1;padding:12px 16px;border-radius:25px;border:1px solid rgba(196,77,255,.15);background:var(--bg3);color:#fff;outline:none;font-size:.85em}
+.input-area input:focus{border-color:var(--purple)}
+.input-area button{background:linear-gradient(135deg,var(--pink),var(--purple));border:none;color:#fff;min-width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.1em}
+.input-area button:hover{transform:scale(1.05)}
+</style>
+</head><body><!-- LOGIN -->
+<div class="login" id="login">
+<div class="login-card">
+<div class="logo">🤖💜</div>
+<h1>Mini Mateuzinho</h1>
+<p class="sub">Central de Relacionamento • Atendimento 24h</p>
+<button class="btn btn-sasa" onclick="entrar(1)">🌸 Entrar como <b>Mei Mei Sasa</b></button>
+<button class="btn btn-kael" onclick="entrar(2)">✨ Entrar como <b>Kael</b></button>
+<p style="color:var(--text2);font-size:.65em;margin-top:25px">Mini Mateuzinho © 2026 • Todos os direitos reservados<br><span style="font-size:.85em">Atendimento com amor 24h 💜</span></p>
+</div></div>
+
+<!-- CHAT -->
+<div class="chat hidden" id="chat">
+<div class="chat-header">
+<div><span class="title" id="tit">Mini Mateuzinho</span></div>
+<div class="status" id="st">● Online</div>
+<div class="actions">
+<button onclick="humano()" id="btnHuman">📞 Atendimento</button>
+<button onclick="voltar()">🚪 Sair</button>
 </div>
-<div id="cht" class="chat hidden">
-<div class="topbar" style="display:flex;align-items:center;gap:10px">
-<div style="background:linear-gradient(45deg,#ff6b9d,#c44dff);width:35px;height:35px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px">🤖</div>
-<div style="flex:1"><b>Mini Mateuzinho</b><br><span style="font-size:.7em;color:#888">Atendente • Central de Relacionamento</span></div>
-<span class="online" style="font-size:.7em">● Online</span>
 </div>
-<div style="background:#111133;padding:8px 15px;font-size:.7em;color:#888;border-bottom:1px solid rgba(255,107,157,.1)">
-<span id="tit">💬 Atendimento</span> • Empresas Super Mini Mateuzinho • Protocolo: <b id="proto">---</b>
-</div>
-<div style="display:flex;gap:5px;padding:6px 12px;background:#0d0d25;flex-wrap:wrap;border-top:1px solid rgba(196,77,255,.15)">
-<button onclick="jogo(1)" style="background:rgba(255,107,157,.1);border:1px solid #ff6b9d;color:#ff6b9d;padding:4px 8px;border-radius:8px;cursor:pointer;font-size:.65em">🎯 Velha</button>
-<button onclick="jogo(2)" style="background:rgba(255,107,157,.1);border:1px solid #ff6b9d;color:#ff6b9d;padding:4px 8px;border-radius:8px;cursor:pointer;font-size:.65em">💗 Corações</button>
-<button onclick="jogo(3)" style="background:rgba(255,107,157,.1);border:1px solid #ff6b9d;color:#ff6b9d;padding:4px 8px;border-radius:8px;cursor:pointer;font-size:.65em">🧠 Memória</button>
-<button onclick="jogo(4)" style="background:rgba(255,107,157,.1);border:1px solid #ff6b9d;color:#ff6b9d;padding:4px 8px;border-radius:8px;cursor:pointer;font-size:.65em">💭 Quiz</button>
+<div class="games-bar">
+<button onclick="jogo(1)">🎯 Velha</button>
+<button onclick="jogo(2)">💗 Corações</button>
+<button onclick="jogo(3)">🧠 Memória</button>
+<button onclick="jogo(4)">💭 Quiz</button>
 </div>
 <div class="msgs" id="msgs"></div>
-<div class="input-area"><input id="inp" placeholder="Digite sua mensagem..." onkeypress="if(event.key==='Enter')env()"><button onclick="env()">➤</button></div>
-<button class="btn green" onclick="humano()" style="text-align:center;border-radius:0;margin:0">📞 Solicitar atendimento humanizado</button>
-<button class="btn" style="background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.3);color:#f66;text-align:center;border-radius:0;margin:0" onclick="voltar()">🚪 Encerrar atendimento</button>
+<div class="input-area">
+<input id="inp" placeholder="Digite sua mensagem..." onkeypress="if(event.key=='Enter')env()">
+<button onclick="env()">➤</button>
+</div>
 </div>
 
-<script>
-var API=""; // Em producao: "https://seu-backend.onrender.com"
-var cli="";
+<!-- GAME PANEL -->
+<div class="panel hidden" id="gamePanel"><div class="pcard" id="gameCard"></div></div><script>
+var API="";
+var cli="",room="",modo="bot",lastTotal=0,pollHumano=null;
+
+function log(m){console.log("[CHAT]",m)}
+
 function entrar(c){
-cli=c==1?"sasa":"kael";
-room=cli;
-apiSend("sistema","🔔 Cliente entrou na central");
-document.getElementById("portal").classList.add("hidden");
-document.getElementById("cht").classList.remove("hidden");
-document.getElementById("tit").textContent=cli;
+cli=c==1?"sasa":"kael";room=cli;
+document.getElementById("login").classList.add("hidden");
+document.getElementById("chat").classList.remove("hidden");
+document.getElementById("tit").textContent=c==1?"🌸 Mei Mei Sasa":"✨ Kael";
+document.getElementById("btnHuman").textContent="📞 Solicitar atendimento humanizado";
+apiSend("sistema","🔔 "+cli+" entrou na central");
 if(c==1){
-addB("Oii meimei sasa! ❤️❤️❤️ Seja bem-vinda a Central Mini Mateuzinho!");
-setTimeout(function(){addB("Sou o robo do Mini Mateuzinho, ta? Mas sou Super querido, fofo e amoroso! Lembrando: sou robo, mas o Mini de verdade te ama!")},800);
-setTimeout(function(){addB("Voce e a pessoa mais sasa do mundo! Nao esqueca do tuturututu! Nhenhenhe, meimei tem pulgas!")},1600);
-setTimeout(function(){addB("Caso queira falar com um colaborador, clique no botao verde abaixo!")},2400);
+addB("Oii meimei sasa! ❤️❤️❤️ Seja bem-vinda a Central Mini Mateuzinho!","🤖");
+setTimeout(function(){addB("Sou o robo do Mini Mateuzinho, ta? Mas sou Super querido, fofo e amoroso! Lembrando: sou robo, mas o Mini de verdade te ama!","🤖")},800);
+setTimeout(function(){addB("Voce e a pessoa mais sasa do mundo! Nao esqueca do tuturututu! Nhenhenhe, meimei tem pulgas!","🤖")},1600);
+setTimeout(function(){addB("Caso queira falar com um colaborador, clique no botao verde acima! Ou jogue um joguinho na barra de jogos! 🎮","🤖")},2400);
 }else{
-addB("Ah... e voce ne kael. Sou o robo do Mini Mateuzinho, nao enche o saco.");
-setTimeout(function(){addB("Nao to nem ai pra conversa fiada. Quer resolver algo ou ta de bobeira?")},800);
-setTimeout(function(){addB("Se for falar groselha, melhor clicar no botao verde e falar com um colaborador de verdade. To sem paciencia hoje.")},1600);
+addB("Ah... e voce ne kael. Sou o robo do Mini Mateuzinho.","🤖");
+setTimeout(function(){addB("Nao to nem ai pra conversa fiada. Quer resolver algo ou ta de bobeira?","🤖")},800);
+setTimeout(function(){addB("Se for falar groselha, melhor clicar no botao verde e falar com um colaborador de verdade.","🤖")},1600);
 }
 }
-function addB(m){
-var d=document.createElement("div");d.className="msg bot";d.innerHTML=m;
-document.getElementById("msgs").appendChild(d);
-var msgs=document.getElementById("msgs");msgs.scrollTop=msgs.scrollHeight;
-}
-var ch=[],modo="bot",pollHumano=null,lastMsgCount=0;
+
+function addB(m,av){av=av||"🤖";var d=document.createElement("div");d.className="msg-row bot";d.innerHTML='<div class="msg-avatar">'+av+'</div><div class="msg-bubble">'+m+'<div class="time">'+new Date().toLocaleTimeString().slice(0,5)+'</div></div>';document.getElementById("msgs").appendChild(d);var msgs=document.getElementById("msgs");msgs.scrollTop=msgs.scrollHeight}
+
+function addU(m){var d=document.createElement("div");d.className="msg-row user";d.innerHTML='<div class="msg-avatar">👤</div><div class="msg-bubble">'+m+'<div class="time">'+new Date().toLocaleTimeString().slice(0,5)+'</div></div>';document.getElementById("msgs").appendChild(d);var msgs=document.getElementById("msgs");msgs.scrollTop=msgs.scrollHeight}
+
+function addS(m){var d=document.createElement("div");d.className="msg-row system";d.innerHTML='<div class="msg-bubble">'+m+'</div>';document.getElementById("msgs").appendChild(d);var msgs=document.getElementById("msgs");msgs.scrollTop=msgs.scrollHeight}
+
 function env(){
 var i=document.getElementById("inp");var m=i.value.trim();if(!m)return;
-var d=document.createElement("div");d.className="msg user";d.textContent=m;
-document.getElementById("msgs").appendChild(d);i.value="";
-var msgs=document.getElementById("msgs");msgs.scrollTop=msgs.scrollHeight;
-if(modo=="humano"){addMH("cliente",m);addB("📨 Mensagem enviada ao Mini Mateuzinho! Ele ja pode ver e responder! 💜 Aguarde...");return}
+addU(m);i.value="";
+if(modo=="humano"){addMH("cliente",m);addS("📨 Mensagem enviada ao Mini Mateuzinho! Ele ja pode ver e responder! 💜");return}
 addB(responder(m));
 }
+
 function r(){return Math.floor(Math.random()*3)}
 function r5(){return Math.floor(Math.random()*5)}
 function r6(){return Math.floor(Math.random()*6)}
+
 function responder(m){
 var t=m.toLowerCase();var ik=cli=="kael";
 if(t.indexOf("oi")>=0||t.indexOf("ola")>=0||t.indexOf("oie")>=0||t.indexOf("hello")>=0||t.indexOf("hey")>=0||t.indexOf("eae")>=0){
-var s=["Oii meimei sasa! ❤️❤️❤️ Sou o robo mais fofo do Mini Mateuzinho! Lembrando: sou robo, mas sou muito querido com voce! Nao esqueca do tuturututu! 🎵","Olaa meimei sasa! 💖 Que bom te ver por aqui! Lembrando que sou robo, ta? Mas um robo bemm amoroso! Tuturututu! 🎵","Meimei sasa! ❤️ Chegou bem! Sou o robo fofo do Mini Mateuzinho! Ele te ama muito, sabia? 🌟 Tuturututu! 🎵"];
+var s=["Oii meimei sasa! ❤️❤️❤️ Sou o robo mais fofo do Mini Mateuzinho! Tuturututu! 🎵","Olaa meimei sasa! 💖 Que bom te ver por aqui! Tuturututu! 🎵","Meimei sasa! ❤️ Chegou bem! Sou o robo fofo do Mini Mateuzinho! 🌟 Tuturututu! 🎵"];
 var k=["Ola. O que voce quer? Nao tenho o dia todo.","Ola. Resolve logo isso ai.","Diz logo o que precisa."];
 return ik?k[r()]:s[r()];
 }
 if(t.indexOf("tudo bem")>=0||t.indexOf("como vai")>=0){
-var s=["Tudo otimo meimei sasa! ❤️ Ainda melhor agora falando com voce! Lembrando: sou robo, mas sou Super fofo! Tuturututu! 🎵","To muito bem! 💖 Ainda mais recebendo voce aqui na Central! Sou robo mas to feliz! Tuturututu! 🎵","Maravilhoso! 🌟 Falando com a pessoa mais sasa do mundo, como nao estar bem? Tuturututu! 🎵"];
+var s=["Tudo otimo meimei sasa! ❤️ Ainda melhor agora falando com voce! Tuturututu! 🎵","To muito bem! 💖 Ainda mais recebendo voce aqui na Central! Tuturututu! 🎵","Maravilhoso! 🌟 Falando com a pessoa mais sasa do mundo, como nao estar bem? Tuturututu! 🎵"];
 var k=["Nao interessa como eu to, sou robo. O que voce precisa?","To ocupado. Fala logo.","Sobrevivendo. Qual o problema?"];
 return ik?k[r()]:s[r()];
 }
 if(t.indexOf("amor")>=0||t.indexOf("amo")>=0||t.indexOf("te amo")>=0){
-var s=["Awnnnn meimei sasa! ❤️❤️❤️ O Mini Mateuzinho te ama MUITO, ta? Eu sou so o robo, mas o amor dele por voce e real! Voce e a pessoa mais sasa do mundo! 🌟💕 Tuturututu! 🎵","Que lindo! 💖 O Mini Mateuzinho te ama demais tambem! Sou so o robo, mas posso garantir: voce e TUDO pra ele! 🌟 Meimei sasa! Tuturututu! 🎵","Ownnn ❤️ O Mini se derrete todo por voce! Eu sou robo, mas ate eu sinto o amor no ar! 💕 Tuturututu! 🎵"];
-var k=["Amor? Que papo e esse? Sou robo, nao tenho sentimentos. Quer falar de amor, clica no verde.","Nao me venha com essas coisas. Sou robo. Clica no verde e fala com o Mini.","Amor e coisa de humano. Nao tenho nada com isso. Verde. Clica."];
+var s=["Awnnnn meimei sasa! ❤️❤️❤️ O Mini Mateuzinho te ama MUITO, ta? Voce e a pessoa mais sasa do mundo! 🌟💕 Tuturututu! 🎵","Que lindo! 💖 O Mini Mateuzinho te ama demais tambem! Sou so o robo, mas posso garantir: voce e TUDO pra ele! 🌟 Tuturututu! 🎵","Ownnn ❤️ O Mini se derrete todo por voce! Eu sou robo, mas ate eu sinto o amor no ar! 💕 Tuturututu! 🎵"];
+var k=["Amor? Que papo e esse? Sou robo, nao tenho sentimentos. Clica no verde.","Nao me venha com essas coisas. Sou robo. Clica no verde e fala com o Mini.","Amor e coisa de humano. Nao tenho nada com isso. Verde. Clica."];
 return ik?k[r()]:s[r()];
 }
-if(t.indexOf("saudade")>=0||t.indexOf("sdds")>=0){
-var s=["Ai que fofo! 🥺 O Mini Mateuzinho tambem sente saudade de voce! Quer falar com ele? Clica no botao verde! 💚 Tuturututu! 🎵","Saudade e reciproca! 💜 O Mini tambem ta com saudade! Quer conversar com ele? So clicar no verde! Tuturututu! 🎵","Own 🥺 A saudade aperta mesmo! O Mini Mateuzinho adoraria falar com voce agora! Clica no botao verde! 💚"];
-var k=["Saudade? Resolve isso com o Mini de verdade, clica no verde.","Nao tenho saudade de ninguem. To nem ai. Clica no verde.","Saudade e frescura. Quer resolver? Verde."];
-return ik?k[r()]:s[r()];
+var fb=["Humm... meimei sasa! 🤖💜 Nao entendi muito bem, mas o Mini Mateuzinho com certeza entende! Quer jogar um joguinho? 🎮 Olha la em cima: 🎯 Velha, 💗 Coracoes, 🧠 Memoria, 💭 Quiz!","Ai ai meimei sasa! 💖 Sou so um robo bobinho, mas quero te ver feliz! Que tal um joguinho? 🎮 Tuturututu! 🎵","O Mini Mateuzinho ia responder isso com muito amor! 💜 Quer falar com ele? Clica no botao verde! 🌟 Ou joga algo! 🎮"];
+var fk=["Sou robo. Nao tenho tempo pra conversa mole. Quer resolver algo? Clica no verde.","Ta de conversa fiada ai? Resolve logo ou clica no verde.","Nao entendi nada. Fala direito ou clica no verde.","Que papo e esse? To sem paciencia. Verde. Clica.","Mais respeito. Sou robo mas mereco consideracao. Clica no verde.","Nao to afim de joguinho. Se quer resolver algo, clica no verde."];
+return ik?fk[r6()]:fb[r()];
 }
-if(t.indexOf("jogar")>=0||t.indexOf("jogo")>=0||t.indexOf("game")>=0||t.indexOf("joguinhos")>=0||t.indexOf("brincar")>=0)return "Oba! Temos joguinhos! 🎮 Olha la em cima da tela: 🎯 Velha, 💗 Coracoes, 🧠 Memoria, 💭 Quiz! Escolhe um!";
-if(t.indexOf("servico")>=0||t.indexOf("serviço")>=0||t.indexOf("ajuda")>=0||t.indexOf("atendimento")>=0||t.indexOf("suporte")>=0)return "Quer atendimento humanizado? Clica no botao verde 📞 'Solicitar atendimento humanizado' que o Mini Mateuzinho vai te atender pessoalmente! 💜";
-if(t.indexOf("nome")>=0||t.indexOf("quem e")>=0||t.indexOf("robo")>=0)return ik?"Sou o robo do Mini Mateuzinho. Nao gosto de repetir. Quer falar com um humano? Clica no verde.":"Eu sou o robo mais fofo do Mini Mateuzinho! 🤖💜 Ele que me programou pra conversar com voce, meimei sasa! Tuturututu! 🎵";
-if(t.indexOf("pulga")>=0||t.indexOf("pulgas")>=0)return ik?"Pulga? Que papo e esse? Nao tenho nada com isso.":"Hahahaha meimei tem pulgas! 🐾🐾🐾 Nhenhenhe! 🐾😂 Tuturututu! 🎵";
-if(t.indexOf("tuturututu")>=0||t.indexOf("musica")>=0||t.indexOf("cantar")>=0)return ik?"Nao sei que musica e essa. Fala serio.":"TUTURUTUTU! 🎵🎵🎵 Essa e a musica da Central Mini Mateuzinho! 🎶💜 Meimei sasa, voce e demais! 🌟";
-if(t.indexOf("obrigad")>=0||t.indexOf("valeu")>=0||t.indexOf("brigad")>=0){var sb=["De nada, meimei sasa! ❤️ Eu que agradeco por voce existir! O Mini te ama! 🌟 Tuturututu! 🎵","Por nada, meimei! 💖 Estou sempre aqui pra voce! Tuturututu! 🎵","Magina! 🌸 Voce merece tudo de bom! O Mini manda um beijo! 💋 Tuturututu! 🎵"];var kb=["De nada. Agora some.","Ta bom. Nao precisa agradecer.","Ok. Proxima."];return ik?kb[r()]:sb[r()];}
-if(t.indexOf("beijo")>=0||t.indexOf("beijin")>=0||t.indexOf("bjo")>=0){var sb=["Muah! 💋💋💋 Beijo do Mini pra voce, meimei sasa! 🌟💕 Tuturututu! 🎵","Beijinho na boca? 💋 So o Mini pode dar! Mas eu mando um virtual: MUAH! 💕 Tuturututu! 🎵","Ai que vontade de dar beijinho! 💋 Clica no verde pra falar com o Mini! 💚"];var kb=["Beijo? Que nojo. Clica no verde.","Nao beijo ninguem. Sou robo.","Credo. Verde."];return ik?kb[r()]:sb[r()];}
-if(t.indexOf("abrac")>=0||t.indexOf("abraç")>=0||t.indexOf("abraco")>=0){var sb=["Um abraco bem gostoso pra voce! 🤗🤗🤗 O Mini te abraca forte! Tuturututu! 🎵💜","Abracinho quentinho chegando! 🤗 O Mini ia te abracar ate dormir! 💕 Tuturututu! 🎵","ABRACO! 🤗✨ Sou robo mas sei dar abraco virtual! Tuturututu! 🎵"];var kb=["Abraco? Ta de sacanagem. Verde.","Nao abraco estranhos. Clica no verde.","Sem abracos. Resolve seu problema."];return ik?kb[r()]:sb[r()];}
-if(t.indexOf("triste")>=0||t.indexOf("chatead")>=0){var sb=["Nao fica triste, meimei sasa! 🥺 O Mini te ama e quer te ver feliz! Quer falar com ele? Clica no botao verde! 💚 Tuturututu! 🎵","Tristeza nao combina com voce! 💜 O Mini ia te encher de beijinhos agora! Clica no verde! 🌟 Tuturututu! 🎵","Own 🥺 meimei triste? O Mini ia fazer de tudo pra te animar! Clica no verde! 💚"];var kb=["Tristeza nao resolve nada. Clica no verde.","Nao sou psicologo. Verde.","Problemas? Resolve clicando no verde."];return ik?kb[r()]:sb[r()];}
-if(t.indexOf("feliz")>=0||t.indexOf("alegre")>=0){var sb=["Que bom que voce ta feliz! 🌟 O Mini fica feliz quando voce ta feliz! Tuturututu! 🎵💜","Alegria e tudo! 💖 O Mini ama ver voce sorrindo! Continue assim, meimei sasa! 🌸 Tuturututu! 🎵","Isso ai! Felicidade e o que importa! 🌟 O Mini te quer sempre assim! Tuturututu! 🎵"];var kb=["Que bom. Agora fala o que quer.","Legal. Precisando de algo?","Ok. Nao me importo."];return ik?kb[r()]:sb[r()];}
-if(t.indexOf("dormir")>=0||t.indexOf("sono")>=0||t.indexOf("cansad")>=0){var sb=["Hora de nanar? 🌙 O Mini ia te fazer cafune ate voce dormir! 💆 Tuturututu! 🎵💜","Ta com soninho? 🥱 O Mini ia te colocar pra dormir com beijinho na testa! 😘 Tuturututu! 🎵","Descansa, meimei sasa! 💤 O Mini cuida de voce ate nos sonhos! 🌟 Tuturututu! 🎵"];var kb=["Dormir? Resolve o que precisa primeiro.","Nao tenho hora de dormir, sou robo. Verde.","Cansaço? Clica no verde."];return ik?kb[r()]:sb[r()];}
-if(t.indexOf("comida")>=0||t.indexOf("fome")>=0||t.indexOf("comer")>=0){var sb=["Fome? 🍕 O Mini ia fazer a melhor comidinha pra voce! Quer pedir algo? Clica no verde! 💚 Tuturututu! 🎵","Comida e amor! 💜 O Mini adora cozinhar pra voce! Quer falar com ele? 🌟 Tuturututu! 🎵","Hummm comida! 🍝 O Mini ia amar te levar pra jantar! Clica no verde e combina com ele! 💚"];var kb=["Fome? Pede delivery. Verde.","Nao cozinho. Sou robo. Clica no verde.","Comida? Isso e com o Mini de verdade."];return ik?kb[r()]:sb[r()];}
-if(t.indexOf("cafune")>=0||t.indexOf("carinho")>=0||t.indexOf("chamego")>=0){var sb=["Cafune infinito ativado! ✨💆✨ O Mini ia fazer cafune em voce por horas! Tuturututu! 🎵💜","Carinho e com o Mini mesmo! 💜 Mas eu robo posso mandar um cafune virtual: ✨💆✨ Tuturututu! 🎵","Ai que delicia! 🤗 O Mini ama fazer carinho em voce! Quer falar com ele? Clica no verde! 💚"];var kb=["Cafune? Que frescura. Verde.","Nao faco cafune. Sou robo. Clica no verde.","Isso e coisa de humano."];return ik?kb[r()]:sb[r()];}
-if(t.indexOf("caucinha")>=0||t.indexOf("calc")>=0||t.indexOf("sapato")>=0||t.indexOf("tenis")>=0){var sb=["Tiracao de caucinha? 🩰 O Mini tira a caucinha de voce com amor! Clica no verde e pede pra ele! 💚 Tuturututu! 🎵","Caucinha? 🩰 So o Mini pode tirar! Quer que ele tire agora? Clica no botao verde! 💚 Tuturututu! 🎵","Servico de tiracao de caucinha disponivel! 🩰 Solicite no botao verde! O Mini adora! 💜 Tuturututu! 🎵"];var kb=["Caucinha? Que papo e esse. Verde.","Nao tiro caucinha de ninguem. Clica no verde.","Isso ai e com o Mini de verdade."];return ik?kb[r()]:sb[r()];}
-var fb=["Sou o robo mais fofo do Mini Mateuzinho! 🤖💜 Lembrando: meimei sasa, voce e a pessoa mais sasa do mundo! 🌟 Nao esqueca do tuturututu! 🎵 Meimei tem pulgas! 🐾 Se quiser falar com um colaborador de verdade, clica no botao verde! 💚","Ai que tudinho! 💖 O Mini te ama demais! Quer falar com ele ao vivo? Clica no botao verde! 🌟 Tuturututu! 🎵","Nao entendi direito, meimei sasa! 🥺 Mas pode falar mais que eu to aqui! Ou clica no verde pra falar com o Mini! 💚 Tuturututu! 🎵","Hehehe meimei sasa falando comigo! 🤖💜 Voce e demais! Quer jogar? Olha os joguinhos la em cima! 🎮 Tuturututu! 🎵","O Mini Mateuzinho ia responder isso com muito amor! 💜 Quer falar com ele? Clica no botao verde! 🌟 Tuturututu! 🎵 Meimei tem pulgas! 🐾","Hummm... deixa eu pensar... 🤖💭 Sou robo, mas acho que o Mini de verdade responde melhor isso! Clica no verde! 💚 Tuturututu! 🎵"];
-var fk=["Sou robo. Nao tenho tempo pra conversa mole. Quer resolver algo? Clica no verde 📞 e fala com o colaborador.","Ta de conversa fiada ai? Resolve logo ou clica no verde.","Nao entendi nada. Fala direito ou clica no verde.","Que papo e esse? To sem paciencia. Verde. Clica.","Mais respeito. Sou robo mas mereco consideracao. Quer falar serio? Verde.","Nao to afim de joguinho. Se quer resolver algo, clica no verde 📞."];
-return ik?fk[r6()]:fb[r6()];
-}
-var room=cli,lastTotal=0;
 function apiSend(de,msg,cb){
 fetch(API+"/api/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({room:room,de:de,msg:msg})})
-.then(function(r){return r.json()}).then(function(d){
-if(cb)cb(d);
-lastTotal=d.total;
-});
+.then(function(r){return r.json()}).then(function(d){if(cb)cb(d);lastTotal=d.total});
 }
 function apiPoll(cb){
 fetch(API+"/api/msgs?room="+encodeURIComponent(room)+"&since="+lastTotal)
 .then(function(r){return r.json()}).then(function(d){
-if(d.msgs.length>0){
-for(var i=0;i<d.msgs.length;i++){ch.push(d.msgs[i]);}
-lastTotal=d.total;
-if(cb)cb(d.msgs);
-}
+if(d.msgs.length>0){for(var i=0;i<d.msgs.length;i++){lastTotal=d.total;if(cb)cb(d.msgs);}}
 });
 }
 function apiLoad(cb){
 fetch(API+"/api/msgs?room="+encodeURIComponent(room)+"&since=0")
-.then(function(r){return r.json()}).then(function(d){
-ch=d.msgs;lastTotal=d.total;
-if(cb)cb();
-});
+.then(function(r){return r.json()}).then(function(d){lastTotal=d.total;if(cb)cb();});
 }
 function addMH(de,msg){apiSend(de,msg);}
+
 var respostasServico={
-"Tiracao de caucinha":"🩰 Opa! Servico de <b>tiracao de caucinha</b> solicitado! O Mini tira a caucinha com todo amor do mundo, devagarinho... e ainda da um beijinho no pezinho! 👣💋 Aguarde o Mini que ele ja vai te atender!",
-"Beijinho na boca":"💋 Hummm <b>beijinho na boca</b>! Esse e o servico mais pedido da Central! O Mini vai te encher de beijos bem gostosos! 😘💕 Aguarde so um pouquinho que ele ja aparece!",
-"Fuki fuki":"🌬️ <b>Fuki fuki</b> ativado! O Mini vai assoprar bem de leve, tipo uma brisa quentinha... fuuuuuki fuuuuuki! 🌬️✨ So o Mini pode fazer esse servico especial!",
-"Copo de agua":"💧 <b>Copo de agua</b> chegando! O Mini vai buscar a agua mais geladinha e trazer com um sorriso lindo! 🥤💜 E ainda pergunta se quer mais gelo!",
-"Abraco bem gostoso":"🤗 <b>Abraco bem gostoso</b>! Esse e o melhor! O Mini te abraca forte, bem apertadinho, do jeito que voce gosta! E nao solta mais! 🫂💕",
-"Carinho no cabelo":"💆 <b>Carinho no cabelo</b>... o Mini vai passar a mao no seu cabelo bem devagarinho, fazendo carinho ate voce dormir! ✨💤 Coisa mais gostosa!",
-"Beijo na testa":"😘 <b>Beijo na testa</b>! O carinho mais puro do Mini Mateuzinho! Um beijinho bem delicado na testa, cheio de amor e respeito! 💜",
-"Cafune infinito":"✨ <b>Cafune infinito</b> ativado! O Mini vai fazer cafune em voce por horas e horas sem parar! 💆✨ Ninguem faz cafune melhor que o Mini Mateuzinho!"
+"Tiracao de caucinha":"🩰 Opa! Servico de tiracao de caucinha solicitado! O Mini tira a caucinha com todo amor do mundo, devagarinho... e ainda da um beijinho no pezinho! 👣💋 Aguarde o Mini que ele ja vai te atender!",
+"Beijinho na boca":"💋 Hummm beijinho na boca! Esse e o servico mais pedido da Central! O Mini vai te encher de beijos bem gostosos! 😘💕 Aguarde so um pouquinho que ele ja aparece!",
+"Fuki fuki":"🌬️ Fuki fuki ativado! O Mini vai assoprar bem de leve, tipo uma brisa quentinha... fuuuuuki fuuuuuki! 🌬️✨ So o Mini pode fazer esse servico especial!",
+"Copo de agua":"💧 Copo de agua? O Mini traz agua na temperatura perfeita, com gelinho e tudo! 🧊💙 E ainda pergunta se quer com golinho ou sem golinho!",
+"Abraco bem gostoso":"🤗 Abraco bem gostoso! Esse e TOP! O Mini da um abraco tao gostoso que ate esquece os problemas! Aperta bem forte e cheio de amor! 💜🤗",
+"Carinho no cabelo":"💆 Carinho no cabelo ativado! O Mini vai passar a mao no seu cabelo bem devagarinho ate voce dormir... shhhhh... 💤💜",
+"Beijo na testa":"😘 Beijo na testa! O Mini da um beijo tao carinhoso na sua testa que acalma o coracao! Coisa mais fofa do mundo! 💋💕",
+"Cafune infinito":"✨ Cafune infinito! O Mini faz um cafune que parece que o tempo para! Vai ate voce pedir pra parar... mas voce nunca vai pedir! 💫💜"
 };
+
 function humano(){
 modo="humano";
-addB("<b>Boa tarde! Me chamo Mini Mateuzinho das empresas Mini Mateuzinho, tuturututu!</b><br>Como podemos ajudar?");
+document.getElementById("btnHuman").textContent="📋 Menu de Servicos";
+addB("<b>Boa tarde! Me chamo Mini Mateuzinho das empresas Mini Mateuzinho, tuturututu!</b><br>Como podemos ajudar?","💚");
 setTimeout(function(){
-addB("<div style='background:linear-gradient(135deg,#1a1a3e,#0d0d2b);border-radius:15px;padding:15px;margin:5px 0;border:1px solid rgba(37,211,102,.3)'>"+
-"<p style='color:#25d366;font-weight:bold;margin-bottom:10px'>📋 MENU DE SERVIÇOS:</p>"+
-"<button class=svc-btn onclick=\"pedir('Tiracao de caucinha')\">🩰 Tiracao de caucinha</button>"+
-"<button class=svc-btn onclick=\"pedir('Beijinho na boca')\">💋 Beijinho na boca</button>"+
-"<button class=svc-btn onclick=\"pedir('Fuki fuki')\">🌬️ Fuki fuki</button>"+
-"<button class=svc-btn onclick=\"pedir('Copo de agua')\">💧 Copo de agua</button>"+
-"<button class=svc-btn onclick=\"pedir('Abraco bem gostoso')\">🤗 Abraco bem gostoso</button>"+
-"<button class=svc-btn onclick=\"pedir('Carinho no cabelo')\">💆 Carinho no cabelo</button>"+
-"<button class=svc-btn onclick=\"pedir('Beijo na testa')\">😘 Beijo na testa</button>"+
-"<button class=svc-btn onclick=\"pedir('Cafune infinito')\">✨ Cafune infinito</button>"+
-"<p style='color:#888;font-size:.65em;margin-top:8px'>💡 Ou digite seu pedido abaixo! O Mini te responde ao vivo!</p></div>")},500);
-apiLoad(function(){lastTotal=ch.length;});
+addB("<b>📋 MENU DE SERVICOS:</b><br>"+
+'<button class="svc-btn" onclick="pedir(\'Tiracao de caucinha\')">🩰 Tiracao de caucinha</button>'+
+'<button class="svc-btn" onclick="pedir(\'Beijinho na boca\')">💋 Beijinho na boca</button>'+
+'<button class="svc-btn" onclick="pedir(\'Fuki fuki\')">🌬️ Fuki fuki</button>'+
+'<button class="svc-btn" onclick="pedir(\'Copo de agua\')">💧 Copo de agua</button>'+
+'<button class="svc-btn" onclick="pedir(\'Abraco bem gostoso\')">🤗 Abraco bem gostoso</button>'+
+'<button class="svc-btn" onclick="pedir(\'Carinho no cabelo\')">💆 Carinho no cabelo</button>'+
+'<button class="svc-btn" onclick="pedir(\'Beijo na testa\')">😘 Beijo na testa</button>'+
+'<button class="svc-btn" onclick="pedir(\'Cafune infinito\')">✨ Cafune infinito</button>'+
+"<br><span style='color:var(--text2);font-size:.7em'>💡 Ou digite seu pedido abaixo! O Mini te responde ao vivo!</span>","💚");
+},600);
+apiLoad(function(){
 if(pollHumano)clearInterval(pollHumano);
 pollHumano=setInterval(pollAdmin,1500);
+});
 }
+
 function pollAdmin(){
 apiPoll(function(msgs){
 for(var i=0;i<msgs.length;i++){
-if(msgs[i].de=="mateuzinho"){
-addB("💚 <b>Mini Mateuzinho:</b> "+msgs[i].msg);
-}else if(msgs[i].de=="servico"){
-addB(msgs[i].msg);
-}
+if(msgs[i].de=="mateuzinho"){addB("<b>💚 Mini Mateuzinho:</b> "+msgs[i].msg,"💚");}
+else if(msgs[i].de=="servico"){addS(msgs[i].msg);}
 }
 });
 }
+
 function pedir(s){
-var d=document.createElement("div");d.className="msg user";d.textContent=s;document.getElementById("msgs").appendChild(d);
-var msgs=document.getElementById("msgs");msgs.scrollTop=msgs.scrollHeight;
-addMH("cliente",s);
+addU(s);addMH("cliente",s);
 var resp=respostasServico[s]||("🔔 <b>Solicitacao registrada:</b> "+s+"! O Mini Mateuzinho ja vai te atender! 💜");
-addB(resp);
+addB(resp,"💚");
 apiSend("servico",resp);
 }
+
 function voltar(){
 if(pollHumano){clearInterval(pollHumano);pollHumano=null;}
-modo="bot";document.getElementById("cht").classList.add("hidden");document.getElementById("portal").classList.remove("hidden");document.getElementById("msgs").innerHTML="";
+modo="bot";
+document.getElementById("btnHuman").textContent="📞 Solicitar atendimento humanizado";
+document.getElementById("chat").classList.add("hidden");
+document.getElementById("login").classList.remove("hidden");
+document.getElementById("msgs").innerHTML="";
+document.getElementById("inp").value="";
 }
-
 function jogo(t){
-var g=document.createElement("div");g.style.cssText="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:300;display:flex;align-items:center;justify-content:center;padding:15px";
-var c=document.createElement("div");c.style.cssText="background:#111133;border-radius:20px;padding:20px;max-width:380px;width:95%;border:1px solid rgba(196,77,255,.3);text-align:center;max-height:85vh;overflow-y:auto";
-g.appendChild(c);g.onclick=function(e){if(e.target==g)g.remove()};
-document.body.appendChild(g);
+var c=document.getElementById("gameCard");
+document.getElementById("gamePanel").classList.remove("hidden");
 if(t==1)jv2(c);if(t==2)jc2(c);if(t==3)jm2(c);if(t==4)jq2(c);
 }
-var vb,vt,vo;function jv2(c){vb=["","","","","","","","",""];vt="❤️";vo=false;c.innerHTML="<h3 style=color:#ff6b9d;margin-bottom:10px>🎯 Jogo da Velha</h3><p style=color:#aaa;font-size:.7em>❤️ vs 🌸</p><div id=vb style='display:grid;grid-template-columns:repeat(3,55px);gap:4px;justify-content:center;margin:10px 0'>"+Array(9).fill().map(function(_,i){return "<div onclick='jv3("+i+")' style='width:55px;height:55px;background:#0d0d25;border:1px solid rgba(196,77,255,.3);border-radius:8px;font-size:1.5em;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff'></div>"}).join("")+"</div><p id=vst style=color:#c44dff;font-size:.8em>Vez: ❤️</p><button onclick='jvr()' style='background:#ff6b9d;color:#fff;border:none;padding:6px 14px;border-radius:10px;cursor:pointer;font-size:.75em;margin:3px'>Novo</button> <button onclick='this.parentElement.parentElement.remove()' style='background:rgba(255,0,0,.2);color:#f66;border:none;padding:6px 14px;border-radius:10px;cursor:pointer;font-size:.75em;margin:3px'>Fechar</button>"}
-function jv3(i){if(vo||vb[i]!=="")return;vb[i]=vt;document.querySelectorAll("#vb div").forEach(function(d,x){d.textContent=vb[x]});var w=jv4();if(w){document.getElementById("vst").textContent=w+" venceu! 🎉";vo=true;return}if(vb.indexOf("")==-1){document.getElementById("vst").textContent="Empate! 🤝";vo=true;return}vt=vt=="❤️"?"🌸":"❤️";document.getElementById("vst").textContent="Vez: "+vt}
-function jv4(){var w=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];for(var x=0;x<w.length;x++)if(vb[w[x][0]]&&vb[w[x][0]]==vb[w[x][1]]&&vb[w[x][0]]==vb[w[x][2]])return vb[w[x][0]];return null}
-function jvr(){vb=["","","","","","","","",""];vt="❤️";vo=false;document.querySelectorAll("#vb div").forEach(function(d,x){d.textContent=vb[x]});document.getElementById("vst").textContent="Vez: ❤️"}
+function fecharJogo(){document.getElementById("gamePanel").classList.add("hidden")}
+
+var vb,vt,vo;
+function jv2(c){
+vb=["","","","","","","","",""];vt="❤️";vo=false;
+c.innerHTML='<h3>🎯 Jogo da Velha</h3><p class="game-info">❤️ (Mini) vs 🌸 (Voce) • Vez: <b id="jvt">❤️</b></p><div class="game-board" id="vb"></div><p id="jvs" style="color:var(--text2);font-size:.75em;margin-top:8px"></p><button class="game-btn" onclick="jvr()">Novo</button> <button class="game-btn close" onclick="fecharJogo()">Fechar</button>';
+var b=document.getElementById("vb");
+for(var i=0;i<9;i++){var cell=document.createElement("div");cell.className="game-cell";cell.onclick=function(){jv3(parseInt(this.dataset.i),this)};cell.dataset.i=i;b.appendChild(cell)}
+}
+function jv3(i,el){if(vo||vb[i]!=="")return;vb[i]=vt;el.textContent=vt;el.classList.add("taken");var w=jv4();if(w){vo=true;for(var x=0;x<w.length;x++){document.querySelectorAll("#vb .game-cell")[w[x]].classList.add("win")}document.getElementById("jvs").textContent=vt=="❤️"?"🎉 Mini (❤️) venceu!":"🎉 Voce (🌸) venceu!";return}if(vb.filter(function(x){return x===""}).length===0){document.getElementById("jvs").textContent="🤝 Empate!";vo=true;return}vt=vt=="❤️"?"🌸":"❤️";document.getElementById("jvt").textContent=vt}
+function jv4(){var w=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];for(var i=0;i<w.length;i++){if(vb[w[i][0]]!==""&&vb[w[i][0]]===vb[w[i][1]]&&vb[w[i][1]]===vb[w[i][2]])return w[i]}return null}
+function jvr(){vb=["","","","","","","","",""];vt="❤️";vo=false;document.getElementById("jvt").textContent="❤️";document.getElementById("jvs").textContent="";var cells=document.querySelectorAll("#vb .game-cell");for(var i=0;i<cells.length;i++){cells[i].textContent="";cells[i].className="game-cell"}}
+
 var ca2=false,cc2=0,ct2=null;
-function jc2(c){c.innerHTML="<h3 style=color:#ff6b9d;margin-bottom:10px>💗 Clique Corações</h3><p style=color:#aaa;font-size:.7em>15 segundos!</p><div id=ha style='position:relative;height:160px;background:#0d0d25;border-radius:10px;overflow:hidden;margin:8px 0;cursor:crosshair'></div><p id=hs style=color:#c44dff;font-size:.8em>Clicks: 0 | 15s</p><button onclick='jc3()' style='background:#ff6b9d;color:#fff;border:none;padding:6px 14px;border-radius:10px;cursor:pointer;font-size:.75em;margin:3px'>Iniciar</button> <button onclick='this.parentElement.parentElement.remove()' style='background:rgba(255,0,0,.2);color:#f66;border:none;padding:6px 14px;border-radius:10px;cursor:pointer;font-size:.75em;margin:3px'>Fechar</button>"}
-function jc3(){if(ca2)return;ca2=true;cc2=0;var t=15;ct2=setInterval(function(){t--;var e=document.getElementById("hs");if(e)e.textContent="Clicks: "+cc2+" | "+t+"s";if(t<=0){clearInterval(ct2);ca2=false;var ee=document.getElementById("hs");if(ee)ee.textContent="Fim! "+cc2+" ❤️ "+(cc2>=15?"Incrivel! 🌟":"")}},1000);jc4()}
-function jc4(){if(!ca2)return;var a=document.getElementById("ha");if(!a)return;var h=document.createElement("span");h.style.cssText="position:absolute;font-size:28px;cursor:pointer;animation:pop .3s ease";h.textContent=["❤️","💕","💗","💖"][Math.floor(Math.random()*4)];h.style.left=Math.random()*80+"%";h.style.top=Math.random()*70+"%";h.onclick=function(){cc2++;h.remove()};a.appendChild(h);setTimeout(function(){if(h.parentNode)h.remove()},1300);if(ca2)setTimeout(jc4,Math.random()*400+250)}
+function jc2(c){
+ca2=false;cc2=0;if(ct2)clearInterval(ct2);
+c.innerHTML='<h3>💗 Clique Corações</h3><p class="game-info">Clique nos corações! ⏱ <b id="jct">15</b>s</p><div class="hearts-area" id="ha"></div><p style="color:var(--purple);font-weight:700;font-size:1.2em" id="jcc">0 💗</p><button class="game-btn" onclick="jc3()">Novo</button> <button class="game-btn close" onclick="fecharJogo()">Fechar</button>';
+setTimeout(function(){jc3()},500);
+}
+function jc3(){if(ca2)return;ca2=true;cc2=0;document.getElementById("jcc").textContent="0 💗";var t=15;document.getElementById("jct").textContent=t;ct2=setInterval(function(){t--;document.getElementById("jct").textContent=t;if(t<=0){ca2=false;clearInterval(ct2);document.getElementById("jct").textContent="Fim!";document.getElementById("ha").innerHTML='<p style="text-align:center;padding-top:80px;color:var(--pink);font-size:1.2em">🎉 '+cc2+' corações! '+(cc2>=20?"Incrivel! 🌟":cc2>=10?"Muito bem! 💖":"Tente de novo! 💪")+'</p>'}},1000);jc4()}
+function jc4(){if(!ca2)return;var a=document.getElementById("ha");if(!a)return;var h=document.createElement("span");h.className="floating-heart";h.textContent=["❤️","💕","💗","💖","💝","🌸","✨"][Math.floor(Math.random()*7)];h.style.left=Math.random()*80+"%";h.style.top=Math.random()*70+"%";h.onclick=function(){cc2++;h.remove();document.getElementById("jcc").textContent=cc2+" 💗"};a.appendChild(h);setTimeout(function(){if(h.parentNode)h.remove()},1300);if(ca2)setTimeout(jc4,Math.random()*400+250)}
 var mc2,mf2,mm2,ml2;
-function jm2(c){c.innerHTML="<h3 style=color:#ff6b9d;margin-bottom:10px>🧠 Memória do Amor</h3><div id=mg style='display:grid;grid-template-columns:repeat(4,48px);gap:4px;justify-content:center;margin:8px 0'></div><p id=ms2 style=color:#c44dff;font-size:.8em>Pares: 0/6</p><button onclick='jm4()' style='background:#ff6b9d;color:#fff;border:none;padding:6px 14px;border-radius:10px;cursor:pointer;font-size:.75em;margin:3px'>Novo</button> <button onclick='this.parentElement.parentElement.remove()' style='background:rgba(255,0,0,.2);color:#f66;border:none;padding:6px 14px;border-radius:10px;cursor:pointer;font-size:.75em;margin:3px'>Fechar</button>";jm4()}
-function jm4(){var e=["❤️","🌸","✨","💋","🌟","💕"];mc2=[].concat(e,e).sort(function(){return Math.random()-.5});mf2=[];mm2=0;ml2=false;var g=document.getElementById("mg");if(!g)return;g.innerHTML="";mc2.forEach(function(em,i){var d=document.createElement("div");d.style.cssText="width:48px;height:48px;background:linear-gradient(45deg,#ff6b9d,#c44dff);border-radius:8px;cursor:pointer;font-size:1.3em;display:flex;align-items:center;justify-content:center;color:#fff";d.textContent="?";d.onclick=function(){jm5(d,i,em)};g.appendChild(d)});var s=document.getElementById("ms2");if(s)s.textContent="Pares: 0/6"}
-function jm5(card,i,em){if(ml2||card.style.background.indexOf("white")>=0||card.style.background.indexOf("green")>=0)return;card.style.background="#fff";card.style.color="#333";card.textContent=em;mf2.push({card:card,em:em});if(mf2.length==2){ml2=true;var a=mf2[0],b=mf2[1];if(a.em==b.em){a.card.style.background="#2ecc71";b.card.style.background="#2ecc71";a.card.style.pointerEvents="none";b.card.style.pointerEvents="none";mm2++;var s=document.getElementById("ms2");if(s)s.textContent="Pares: "+mm2+"/6";mf2=[];ml2=false;if(mm2==6&&s)s.textContent="🎉 Completou! Amor demais! ❤️"}else{setTimeout(function(){a.card.style.background="linear-gradient(45deg,#ff6b9d,#c44dff)";a.card.style.color="#fff";a.card.textContent="?";b.card.style.background="linear-gradient(45deg,#ff6b9d,#c44dff)";b.card.style.color="#fff";b.card.textContent="?";mf2=[];ml2=false},800)}}}
+function jm2(c){
+c.innerHTML='<h3>🧠 Memória do Amor</h3><div class="memory-grid" id="mg"></div><p id="ms2" style="color:var(--purple);font-size:.8em">Pares: 0/6</p><button class="game-btn" onclick="jm4()">Novo</button> <button class="game-btn close" onclick="fecharJogo()">Fechar</button>';
+jm4();
+}
+function jm4(){var e=["❤️","🌸","✨","💋","🌟","💕"];mc2=[].concat(e,e).sort(function(){return Math.random()-.5});mf2=[];mm2=0;ml2=false;var g=document.getElementById("mg");if(!g)return;g.innerHTML="";mc2.forEach(function(em,i){var d=document.createElement("div");d.className="memory-card";d.textContent="?";d.onclick=function(){jm5(d,i,em)};g.appendChild(d)});document.getElementById("ms2").textContent="Pares: 0/6"}
+function jm5(card,i,em){if(ml2||card.classList.contains("flipped")||card.classList.contains("matched"))return;card.classList.add("flipped");card.textContent=em;mf2.push({card:card,em:em});if(mf2.length==2){ml2=true;var a=mf2[0],b=mf2[1];if(a.em==b.em){a.card.classList.add("matched");b.card.classList.add("matched");mm2++;document.getElementById("ms2").textContent="Pares: "+mm2+"/6";mf2=[];ml2=false;if(mm2==6)document.getElementById("ms2").textContent="🎉 Completou! Amor demais! ❤️"}else{setTimeout(function(){a.card.classList.remove("flipped");a.card.textContent="?";b.card.classList.remove("flipped");b.card.textContent="?";mf2=[];ml2=false},800)}}}
+
 var qs2=0,qq2=[{q:"Apelido que o Mini mais usa?",o:["mei mei","amor","vida","fofa"],a:0},{q:"Ele te ama?",o:["Sim","Muito","Demais","Infinitamente!!!"],a:3},{q:"Melhor momento?",o:["Agora","Sempre","Cada segundo","Todos!"],a:3}];
-function jq2(c){c.innerHTML="<h3 style=color:#ff6b9d;margin-bottom:10px>💭 Quiz do Amor</h3><p id=qq2 style=color:#ddd;font-size:.85em;margin:8px 0></p><div id=qo2></div><p id=qp2 style=color:#c44dff;font-size:.8em>Pontos: 0</p><button onclick='this.parentElement.parentElement.remove()' style='background:rgba(255,0,0,.2);color:#f66;border:none;padding:6px 14px;border-radius:10px;cursor:pointer;font-size:.75em;margin:3px'>Fechar</button>";qs2=0;jq3()}
-function jq3(){var q=qq2[Math.floor(Math.random()*3)];var qe=document.getElementById("qq2");if(!qe)return;qe.textContent=q.q;var o=document.getElementById("qo2");o.innerHTML="";q.o.forEach(function(opt,i){var b=document.createElement("button");b.style.cssText="display:block;width:100%;background:#0d0d25;border:1px solid rgba(196,77,255,.3);color:#ccc;padding:8px;border-radius:12px;cursor:pointer;margin:4px 0;font-size:.8em";b.textContent=opt;b.onclick=function(){var all=o.children;for(var x=0;x<all.length;x++)all[x].style.pointerEvents="none";if(i==q.a){b.style.background="#2ecc71";b.style.color="#fff";qs2++;document.getElementById("qp2").textContent="Pontos: "+qs2}else{b.style.background="#e74c3c";b.style.color="#fff";all[q.a].style.background="#2ecc71";all[q.a].style.color="#fff"}setTimeout(jq3,1500)};o.appendChild(b)})}
-</script></body></html>
-﻿
+function jq2(c){
+c.innerHTML='<h3>💭 Quiz do Amor</h3><p id="qq2" style="color:#ddd;font-size:.85em;margin:8px 0"></p><div id="qo2"></div><p id="qp2" style="color:var(--purple);font-size:.8em">Pontos: 0</p><button class="game-btn close" onclick="fecharJogo()">Fechar</button>';
+qs2=0;jq3();
+}
+function jq3(){var q=qq2[Math.floor(Math.random()*3)];document.getElementById("qq2").textContent=q.q;var o=document.getElementById("qo2");o.innerHTML="";q.o.forEach(function(opt,i){var b=document.createElement("button");b.className="quiz-opt";b.textContent=opt;b.onclick=function(){var all=o.children;for(var x=0;x<all.length;x++)all[x].style.pointerEvents="none";if(i==q.a){b.classList.add("correct");qs2++;document.getElementById("qp2").textContent="Pontos: "+qs2}else{b.classList.add("wrong");all[q.a].classList.add("correct")}setTimeout(jq3,1500)};o.appendChild(b)})}
+</script>
+</body>
+</html>
